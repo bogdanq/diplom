@@ -2,6 +2,7 @@
   "name": "fabric",
   "version": "0.1.0",
   "private": true,
+  "homepage": "  https://bogdanq.github.io/diplom",
   "main": "index.html",
   "dependencies": {
     "@emotion/react": "^11.10.5",
