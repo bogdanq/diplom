@@ -7,7 +7,7 @@ import {
   Backdrop,
   CircularProgress,
 } from "@mui/material";
-import { Routes, Route, BrowserRouter, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, HashRouter } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import { combine } from "effector";
 import { useStore } from "effector-react";
@@ -59,6 +59,7 @@ const App = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      console.log("user", user);
       if (user?.uid) {
         getUserById(user.uid);
       } else {
@@ -139,10 +140,10 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={t}>
       <CssBaseline />
-      <BrowserRouter>
+      <HashRouter>
         <App />
         <ToastContainer />
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   </React.StrictMode>
 );
