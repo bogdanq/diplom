@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/diplom/static/css/main.04d40684.css",
-    "main.js": "/diplom/static/js/main.6f6da363.js",
-    "static/media/slide3.jpeg": "/diplom/static/media/slide3.fad6a6811d2a5ab17b1f.jpeg",
-    "static/media/slide1.jpeg": "/diplom/static/media/slide1.31c660a49404347ca281.jpeg",
-    "static/media/logo.png": "/diplom/static/media/logo.3aac9b754ccf68341728.png",
-    "static/media/slide2.jpeg": "/diplom/static/media/slide2.aa1983175bf1192bbd86.jpeg",
-    "static/media/cart1.jpeg": "/diplom/static/media/cart1.a9fb832e72734e393df3.jpeg",
-    "static/media/furniture.svg": "/diplom/static/media/furniture.89541c1a2abf4798720c05b5760018c8.svg",
-    "static/media/blocks.svg": "/diplom/static/media/blocks.de1b95605582e9f6a8d8ef8529fea537.svg",
-    "static/media/furniture2.svg": "/diplom/static/media/furniture2.4288e14c703faac555bd7c865b00579e.svg",
-    "static/media/furniture3.svg": "/diplom/static/media/furniture3.2dda5ad57d6ef9876e671defcfbab44b.svg",
-    "static/media/print.svg": "/diplom/static/media/print.e5b5d83c5451638ecb071ed7c8a8c05d.svg",
-    "static/media/present.svg": "/diplom/static/media/present.c33cf4a5a1580e3fba0e642a1642b826.svg",
-    "static/media/lightning.svg": "/diplom/static/media/lightning.74c5b566598610c17c5a6b3d93921b12.svg",
-    "static/media/furniture4.svg": "/diplom/static/media/furniture4.20bdbb7dc15fcd745f8496f30fe8df11.svg",
-    "index.html": "/diplom/index.html",
-    "main.04d40684.css.map": "/diplom/static/css/main.04d40684.css.map",
-    "main.6f6da363.js.map": "/diplom/static/js/main.6f6da363.js.map"
+    "main.css": "/diplom2/static/css/main.04d40684.css",
+    "main.js": "/diplom2/static/js/main.3e0f991e.js",
+    "static/media/slide3.jpeg": "/diplom2/static/media/slide3.fad6a6811d2a5ab17b1f.jpeg",
+    "static/media/slide1.jpeg": "/diplom2/static/media/slide1.31c660a49404347ca281.jpeg",
+    "static/media/logo.png": "/diplom2/static/media/logo.3aac9b754ccf68341728.png",
+    "static/media/slide2.jpeg": "/diplom2/static/media/slide2.aa1983175bf1192bbd86.jpeg",
+    "static/media/cart1.jpeg": "/diplom2/static/media/cart1.a9fb832e72734e393df3.jpeg",
+    "static/media/furniture.svg": "/diplom2/static/media/furniture.89541c1a2abf4798720c05b5760018c8.svg",
+    "static/media/blocks.svg": "/diplom2/static/media/blocks.de1b95605582e9f6a8d8ef8529fea537.svg",
+    "static/media/furniture2.svg": "/diplom2/static/media/furniture2.4288e14c703faac555bd7c865b00579e.svg",
+    "static/media/furniture3.svg": "/diplom2/static/media/furniture3.2dda5ad57d6ef9876e671defcfbab44b.svg",
+    "static/media/print.svg": "/diplom2/static/media/print.e5b5d83c5451638ecb071ed7c8a8c05d.svg",
+    "static/media/present.svg": "/diplom2/static/media/present.c33cf4a5a1580e3fba0e642a1642b826.svg",
+    "static/media/lightning.svg": "/diplom2/static/media/lightning.74c5b566598610c17c5a6b3d93921b12.svg",
+    "static/media/furniture4.svg": "/diplom2/static/media/furniture4.20bdbb7dc15fcd745f8496f30fe8df11.svg",
+    "index.html": "/diplom2/index.html",
+    "main.04d40684.css.map": "/diplom2/static/css/main.04d40684.css.map",
+    "main.3e0f991e.js.map": "/diplom2/static/js/main.3e0f991e.js.map"
   },
   "entrypoints": [
     "static/css/main.04d40684.css",
-    "static/js/main.6f6da363.js"
+    "static/js/main.3e0f991e.js"
   ]
 }
