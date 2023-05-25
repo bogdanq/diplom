@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/diplom/static/css/main.04d40684.css",
-    "main.js": "/diplom/static/js/main.43100ad4.js",
+    "main.js": "/diplom/static/js/main.0dec8100.js",
     "static/media/slide3.jpeg": "/diplom/static/media/slide3.fad6a6811d2a5ab17b1f.jpeg",
     "static/media/slide1.jpeg": "/diplom/static/media/slide1.31c660a49404347ca281.jpeg",
     "static/media/logo.png": "/diplom/static/media/logo.3aac9b754ccf68341728.png",
@@ -17,10 +17,10 @@
     "static/media/furniture4.svg": "/diplom/static/media/furniture4.20bdbb7dc15fcd745f8496f30fe8df11.svg",
     "index.html": "/diplom/index.html",
     "main.04d40684.css.map": "/diplom/static/css/main.04d40684.css.map",
-    "main.43100ad4.js.map": "/diplom/static/js/main.43100ad4.js.map"
+    "main.0dec8100.js.map": "/diplom/static/js/main.0dec8100.js.map"
   },
   "entrypoints": [
     "static/css/main.04d40684.css",
-    "static/js/main.43100ad4.js"
+    "static/js/main.0dec8100.js"
   ]
 }
