@@ -1,12 +1,17 @@
 import styled from "styled-components";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Typography, Divider, Button } from "@mui/material";
-import { AddShoppingCart, StarBorder } from "@mui/icons-material";
+import { useNavigate, useParams } from "react-router-dom";
+import { Typography, Divider, Box } from "@mui/material";
 import { formatter } from "../features/common";
-import cart1 from "../assets/cart1.jpeg";
+import { AddToCart } from "../features/cart";
+import { AddToFavorite } from "../features/favorite";
 
 const CartWrapper = styled("div")`
-  width: 100%;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  justify-content: space-around;
   margin-top: 50px;
   border: 1px solid #7d7d7d;
   cursor: pointer;
@@ -39,31 +44,50 @@ const CartWrapper = styled("div")`
   }
 `;
 
-export const ItemCart = ({ typeProduct = "other" }) => {
+export const ItemCart = ({ id, name, description, price, img, type: t }) => {
   const navigate = useNavigate();
-  const { type = typeProduct } = useParams();
+  const { type: pt } = useParams();
+
+  const type = pt || t;
 
   return (
-    <CartWrapper onClick={() => navigate(`/catalog/${type}/1231231`)}>
-      <img src={cart1} alt="cart" width="100%" />
+    <CartWrapper>
+      <div
+        onClick={() => navigate(`/catalog/${type}/${id}`)}
+        style={{ width: "100%" }}
+      >
+        <img src={img} alt="cart" width="100%" height={200} />
 
-      <Typography variant="h6">
-        Кровать металлическая Диана Lux plus 1400x2000
-      </Typography>
-      <Typography>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </Typography>
+        <Typography variant="h6">{name}</Typography>
+        <Typography>{description}</Typography>
+        <Typography variant="h4">{formatter.format(price)}</Typography>
+      </div>
 
-      <Typography variant="h4">{formatter.format(22500)}</Typography>
-
-      <Divider />
-      <Button variant="text" color="secondary" endIcon={<AddShoppingCart />}>
-        В корзину
-      </Button>
-      <Button variant="text" color="secondary" endIcon={<StarBorder />}>
-        В избранное
-      </Button>
+      <div>
+        <Divider />
+        <Box
+          mt="30px"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            height: "10px",
+            paddingLeft: "10px",
+          }}
+        >
+          <AddToCart id={id} type={type} />
+        </Box>
+        <Box
+          mt="30px"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            height: "10px",
+            paddingLeft: "10px",
+          }}
+        >
+          <AddToFavorite id={id} type={type} />
+        </Box>
+      </div>
     </CartWrapper>
   );
 };

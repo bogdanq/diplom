@@ -12,7 +12,9 @@ const createUser = async (user) => {
     user.password
   );
 
-  return set(child(ref(database), `users/${created.user.uid}`), user);
+  await set(child(ref(database), `users/${created.user.uid}`), user);
+
+  return created.user.uid;
 };
 
 const signIn = async (user) => {

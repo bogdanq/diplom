@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo.png";
 import { SignUpForm } from "../../features/auth";
+import { signupFx } from "../sign-in/model";
+import { useStore } from "effector-react";
+import { useEffect } from "react";
 
 const LogoWraper = styled(Box)`
   width: 50%;
@@ -14,6 +17,14 @@ const LogoWraper = styled(Box)`
 
 export const SignUp = () => {
   const navigate = useNavigate();
+
+  const pending = useStore(signupFx.pending);
+
+  useEffect(() => {
+    return signupFx.done.watch(() => {
+      window.location.reload();
+    });
+  }, [navigate]);
 
   return (
     <Grid container height="100vh">
@@ -47,7 +58,7 @@ export const SignUp = () => {
             Введите данные что бы зарегистрироваться
           </Typography>
 
-          <SignUpForm />
+          <SignUpForm onSubmit={signupFx} pending={pending} />
         </Box>
       </Box>
     </Grid>

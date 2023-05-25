@@ -8,16 +8,7 @@ import {
   Table,
 } from "@mui/material";
 
-const rows = [
-  {
-    width: "10м",
-    height: "5м",
-    material: "Дерево",
-    weight: "25кг",
-  },
-];
-
-export const ParamsTable = () => {
+export const ParamsTable = ({ height, width, material, color }) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -26,23 +17,21 @@ export const ParamsTable = () => {
             <TableCell>Ширина</TableCell>
             <TableCell>Высота</TableCell>
             <TableCell>Материал</TableCell>
-            <TableCell>Вес</TableCell>
+            <TableCell>Цвет</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.width}
-              </TableCell>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              {width}(м)
+            </TableCell>
 
-              <TableCell>{row.height}</TableCell>
+            <TableCell>{height}(cм)</TableCell>
 
-              <TableCell>{row.material}</TableCell>
+            <TableCell>{material}</TableCell>
 
-              <TableCell>{row.weight}</TableCell>
-            </TableRow>
-          ))}
+            <TableCell>{color}</TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

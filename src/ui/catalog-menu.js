@@ -25,8 +25,10 @@ export const subMenu = [
     link: "/catalog/other",
     img: furniture,
     desc: `
-    Sit amet justo donec enim diam vulputate ut. Sit amet tellus cras adipiscing. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Condimentum mattis pellentesque id nibh tortor id aliquet lectus. Convallis tellus id interdum velit laoreet id. Ipsum a arcu cursus vitae congue mauris rhoncus aenean
-    `,
+    Мы убеждены, что даже недорогая мебель должна быть качественной:
+    Корпус. Используем ЛДСП 16 мм. Стоит материал дешевле, а выглядит не хуже более дорогих аналогов. Не волнуйтесь, вы, как и ваши гости, разницы не заметите.
+    Обработка торцов. Используем меламиновую кромку. Стоит она втрое дешевле пластика, а благодаря особой технологии нанесения служит столько же (иногда даже дольше). Чтобы добиться этого, мы подфуговываем торцы, идеально выравниваем их после распила и делаем микрофаску. Работаем только на современных кромкооблицовочных станках. Брак исключен.
+    Фурнитура. При выборе ручек и декоративных элементов мы ищем компромиссы между ценой и качеством. Петли и направляющие выдвижных ящиков устанавливаем только брендовые — гарантия производителя 10 лет.    `,
   },
   {
     title: "Кухни",
@@ -45,12 +47,6 @@ export const subMenu = [
     link: "/catalog/material",
     img: blocks,
     desc: ". Neque convallis a cras semper auctor neque vitae tempus quam. Mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa. Vulputate eu scelerisque felis imperdiet proin. Lectus magna fringilla urna porttitor rhoncus dolor. A arcu cursus vitae congue mauris rhoncus aenean vel elit. Fringilla urna porttitor rhoncus dolor purus non enim praesent. Etiam non quam lacus suspendisse faucibus interdum posuere lorem.",
-  },
-  {
-    title: "Столы",
-    link: "/catalog/table",
-    img: furniture4,
-    desc: "Accumsan lacus vel facilisis volutpat est velit egestas dui. Enim eu turpis egestas pretium aenean. Lectus vestibulum mattis ullamcorper velit. Id neque aliquam vestibulum morbi blandit. Purus viverra accumsan in nisl nisi scelerisque eu. Eu tincidunt tortor aliquam nulla facilisi cras fermentum. In fermentum posuere urna nec. Sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque",
   },
   {
     title: "Купэ",

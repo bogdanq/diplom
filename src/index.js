@@ -28,6 +28,8 @@ import {
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
+import { useCart } from "./features/cart";
+import { useFavorite } from "./features/favorite";
 
 const t = createTheme({
   palette: {
@@ -48,7 +50,14 @@ const $state = combine({
   user: $user,
 });
 
+const useGlobalData = () => {
+  useCart();
+  useFavorite();
+};
+
 const App = () => {
+  useGlobalData();
+
   const navigate = useNavigate();
 
   const { pending, user } = useStore($state);
@@ -59,7 +68,7 @@ const App = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log("user", user);
+      // console.log("user", user);
       if (user?.uid) {
         getUserById(user.uid);
       } else {

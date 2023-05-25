@@ -1,20 +1,19 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { ContentCopy } from "@mui/icons-material";
-import styled from "styled-components";
-import { MainHeader } from "../../ui";
-import cart1 from "../../assets/cart1.jpeg";
+import { Box, Button, Divider, Grid, Typography } from "@mui/material";
+import { combine } from "effector";
+import { useStore } from "effector-react";
 
-const formatter = new Intl.NumberFormat("ru-RU", {
-  style: "currency",
-  currency: "RUB",
-});
+import styled from "styled-components";
+import { NonProductsStub, Spinner, MainHeader, Link } from "../../ui";
+import { $user } from "../../features/auth/model";
+import { getNoun } from "../../features/utils";
+
+import {
+  Card,
+  $pendingAllRemove,
+  removeAllCartFx,
+  useCart,
+} from "../../features/cart";
+import { formatter } from "../../features/common";
 
 const Actions = styled(Box)`
   position: sticky;
@@ -24,78 +23,56 @@ const Actions = styled(Box)`
   bottom: 0;
 `;
 
-const CartWrapper = styled("div")`
-  margin-bottom: 30px;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 16%);
-  padding: 10px 5px;
-  border-radius: 8px;
+const $state = combine({
+  user: $user,
+  pendingAllRemove: $pendingAllRemove,
+});
 
-  & img {
-    width: 250px;
-    height: 150px;
-    margin-right: 50px;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
+export const Cart = () => {
+  const { user, pendingAllRemove } = useStore($state);
 
-  & h6 {
-    font-weight: 400;
-  }
-`;
+  const { pending, cart, cartInfo } = useCart();
 
-const actions = [{ title: "Очистить корзину" }, { title: "Оформить заказ" }];
-
-const Card = () => {
-  return (
-    <Grid container item xs={12}>
-      <CartWrapper>
-        <Box display="flex" width="60%" alignItems="center">
-          <img src={cart1} alt="cart" width="100%" />
-          <Box>
-            <Typography variant="h6">
-              Кровать металлическая Диана Lux plus 1400x2000
-            </Typography>
+  if (pending || !cart?.length) {
+    return (
+      <Box height="100vh">
+        <Box maxWidth={1600} margin="0 auto" padding="0 20px" minHeight="100%">
+          <Box
+            position="sticky"
+            top="20px"
+            backgroundColor="#fff"
+            zIndex={99}
+            pb="50px"
+          >
+            <MainHeader />
 
             <Box
-              display="flex"
-              alignItems="center"
-              mt="20px"
-              color="#4e4e4e96"
-              style={{ cursor: "pointer" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <ContentCopy style={{ height: 15 }} />
-              <Typography variant="subtitle2">123124</Typography>
+              {pending && <Spinner />}
+
+              {!pending && (
+                <>
+                  <NonProductsStub title="Товары в корзину еще не добавлены" />
+                  <div>
+                    <Link to="/" underline>
+                      Вернутся на главную
+                    </Link>
+                  </div>
+                </>
+              )}
             </Box>
           </Box>
         </Box>
+      </Box>
+    );
+  }
 
-        <Box display="flex" width="15%" justifyContent="space-around">
-          <TextField
-            focused={false}
-            value={1}
-            type="number"
-            inputProps={{ inputMode: "decimal", min: 0 }}
-            size="small"
-            style={{ width: "90px" }}
-          />
-          <Button variant="outlined" color="secondary">
-            удалить
-          </Button>
-        </Box>
-
-        <Typography fontWeight="bold">
-          1 x {formatter.format(2200)} = {formatter.format(2200)}
-        </Typography>
-      </CartWrapper>
-    </Grid>
-  );
-};
-
-export const Cart = () => {
   return (
     <Box height="100vh">
       <Box maxWidth={1600} margin="0 auto" padding="0 20px" minHeight="100%">
@@ -109,35 +86,51 @@ export const Cart = () => {
           <MainHeader />
 
           <Typography textAlign="center" variant="h4" color="#622a0c">
-            1 товара на сумму:
+            {cartInfo.count}{" "}
+            {getNoun(cartInfo.count, "товар", "товара", "товаров")} на сумму:
             <span style={{ textDecoration: "underline" }}>
-              {formatter.format(2200)}
+              {formatter.format(cartInfo.price)}
             </span>
           </Typography>
         </Box>
 
         <Box mt="50px">
-          <Card />
+          {cart.map((item) => (
+            <Card key={item.id} {...item} user={user} isLink />
+          ))}
         </Box>
       </Box>
 
       <Actions>
         <Divider />
         <Grid container justifyContent="end" mt="30px" wrap="wrap">
-          {actions.map((i, idx) => (
-            <Grid container item xs={4} key={idx} justifyContent="center">
-              <Button
-                style={{
-                  height: "40px",
-                  background: "#622a0c",
-                  width: "250px",
-                }}
-                variant="contained"
-              >
-                {i.title}
-              </Button>
-            </Grid>
-          ))}
+          <Grid container item xs={4} justifyContent="center">
+            <Button
+              onClick={() => removeAllCartFx(user.email)}
+              disabled={pendingAllRemove}
+              style={{
+                height: "40px",
+                background: "#622a0c",
+                width: "250px",
+              }}
+              variant="contained"
+              loading
+            >
+              Очистить корзину
+            </Button>
+          </Grid>
+          <Grid container item xs={4} justifyContent="center">
+            <Button
+              style={{
+                height: "40px",
+                background: "#622a0c",
+                width: "250px",
+              }}
+              variant="contained"
+            >
+              Оформить заказ
+            </Button>
+          </Grid>
         </Grid>
       </Actions>
     </Box>

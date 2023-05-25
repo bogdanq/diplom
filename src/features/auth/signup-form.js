@@ -1,6 +1,23 @@
 import { TextField, Box, Typography, Button } from "@mui/material";
+import { useState } from "react";
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ onSubmit, pending }) => {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    phone: "",
+    name: "",
+  });
+
+  const handleChangeForm = (e) => {
+    const field = e.target.getAttribute("data-name");
+
+    setForm({
+      ...form,
+      [field]: e.target.value,
+    });
+  };
+
   return (
     <Box width="350px">
       <Typography
@@ -11,7 +28,15 @@ export const SignUpForm = () => {
       >
         Имя
       </Typography>
-      <TextField focused={false} fullWidth placeholder="Введите свое имя" />
+      <TextField
+        focused={false}
+        fullWidth
+        placeholder="Введите свое имя"
+        onChange={handleChangeForm}
+        inputProps={{
+          "data-name": "name",
+        }}
+      />
 
       <Typography
         variant="subtitle2"
@@ -22,7 +47,15 @@ export const SignUpForm = () => {
       >
         Почта
       </Typography>
-      <TextField focused={false} fullWidth placeholder="Введите свою почту" />
+      <TextField
+        focused={false}
+        fullWidth
+        placeholder="Введите свою почту"
+        onChange={handleChangeForm}
+        inputProps={{
+          "data-name": "email",
+        }}
+      />
 
       <Typography
         variant="subtitle2"
@@ -38,6 +71,10 @@ export const SignUpForm = () => {
         type="password"
         fullWidth
         placeholder="Введите пароль"
+        onChange={handleChangeForm}
+        inputProps={{
+          "data-name": "password",
+        }}
       />
 
       <Typography
@@ -49,15 +86,26 @@ export const SignUpForm = () => {
       >
         Номер телефона
       </Typography>
-      <TextField focused={false} fullWidth placeholder="+7" />
+      <TextField
+        focused={false}
+        fullWidth
+        placeholder="+7"
+        onChange={handleChangeForm}
+        inputProps={{
+          "data-name": "phone",
+        }}
+      />
 
       <Box mt="30px">
         <Button
+          type="submit"
           size="md"
           width="full"
           variant="contained"
           fullWidth
           color="secondary2"
+          onClick={() => onSubmit(form)}
+          loading={pending}
         >
           Зарегистрироваться
         </Button>

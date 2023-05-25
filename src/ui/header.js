@@ -23,11 +23,13 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { $user } from "../features/auth/model";
+import { $favoriteInfo } from "../features/favorite";
+import { $cartInfo } from "../features/cart";
 
 export const Link = styled(NavLink)`
   display: flex;
   padding-right: 20px;
-  text-decoration: none;
+  text-decoration: ${({ underline }) => (underline ? "underline" : "none")};
   color: #4e4e4e;
   transition: all 0.2s;
   align-items: center;
@@ -62,7 +64,7 @@ const StyledBadge = styled(Badge)(() => ({
   },
 }));
 
-const Header = ({ user }) => {
+const Header = ({ user, cartCount, favoriteCount }) => {
   return (
     <Grid container mt="20px">
       <Grid container item xs={2} alignItems="center" mr="40px">
@@ -78,14 +80,14 @@ const Header = ({ user }) => {
           </Link>
           <Link to="/cart">
             Корзина
-            <StyledBadge badgeContent={1} color="secondary2">
+            <StyledBadge badgeContent={cartCount} color="secondary2">
               <AddShoppingCart />
             </StyledBadge>
           </Link>
 
           <Link to="/favorites">
             Избранное
-            <StyledBadge badgeContent={4} color="secondary2">
+            <StyledBadge badgeContent={favoriteCount} color="secondary2">
               <StarBorder />
             </StyledBadge>
           </Link>
@@ -125,7 +127,7 @@ const Header = ({ user }) => {
   );
 };
 
-const SubHeader = ({ user }) => {
+const SubHeader = ({ user, cartCount }) => {
   return (
     <Grid container mt="20px" mb="50px">
       <Grid container item xs={2} alignItems="center" mr="40px">
@@ -168,9 +170,16 @@ const SubHeader = ({ user }) => {
 export const MainHeader = () => {
   const user = useStore($user);
 
+  const favoriteInfo = useStore($favoriteInfo);
+  const cartInfo = useStore($cartInfo);
+
   return (
     <>
-      <Header user={user} />
+      <Header
+        user={user}
+        cartCount={cartInfo?.count || 0}
+        favoriteCount={favoriteInfo?.count || 0}
+      />
       <SubHeader user={user} />
     </>
   );
