@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+[try it](https://bogdanq.github.io/diplom/)
+
+# Диплом
 
 - Главная страница
   -- Поиск
