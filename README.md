@@ -103,3 +103,8 @@ type User = {
 # Баннеры
 
 # Популярные товары
+
+
+<img width="1680" alt="image" src="https://github.com/bogdanq/diplom/assets/43848668/a2939475-6381-4ef1-b993-e4ce3909aa10">
+<img width="1393" alt="image" src="https://github.com/bogdanq/diplom/assets/43848668/88032e27-640c-4946-8d22-e2aa4b117d56">
+
