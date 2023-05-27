@@ -4,6 +4,7 @@ import { useState } from "react";
 import { $user } from "../../features/auth/model";
 import { OrderList, UserForm } from "../../features/profile";
 import { MainHeader } from "../../ui";
+import { userAPI } from "../../api/auth";
 
 function TabPanel(props) {
   const { children, value, index } = props;

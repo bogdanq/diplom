@@ -1,6 +1,19 @@
 import { TextField, Box, Typography, Button } from "@mui/material";
+import { updateUsersFx } from "../auth/model";
+import { useState } from "react";
 
 export const UserForm = ({ user }) => {
+  const [form, setForm] = useState(user);
+
+  const handleChangeForm = (e) => {
+    const field = e.target.getAttribute("data-name");
+
+    setForm({
+      ...form,
+      [field]: e.target.value,
+    });
+  };
+
   return (
     <Box width="500px">
       <Typography
@@ -12,10 +25,14 @@ export const UserForm = ({ user }) => {
         Имя
       </Typography>
       <TextField
-        value={user.name}
+        value={form.name}
         focused={false}
         fullWidth
         placeholder="Введите свое имя"
+        onChange={handleChangeForm}
+        inputProps={{
+          "data-name": "name",
+        }}
       />
 
       <Typography
@@ -29,10 +46,14 @@ export const UserForm = ({ user }) => {
       </Typography>
       <TextField
         disabled
-        value={user.email}
+        value={form.email}
         focused={false}
         fullWidth
         placeholder="Введите свою почту"
+        onChange={handleChangeForm}
+        inputProps={{
+          "data-name": "email",
+        }}
       />
 
       <Typography
@@ -46,10 +67,14 @@ export const UserForm = ({ user }) => {
       </Typography>
       <TextField
         disabled
-        value={user.password}
+        value={form.password}
         focused={false}
         fullWidth
         placeholder="Введите пароль"
+        onChange={handleChangeForm}
+        inputProps={{
+          "data-name": "password",
+        }}
       />
 
       <Typography
@@ -62,10 +87,14 @@ export const UserForm = ({ user }) => {
         Номер телефона
       </Typography>
       <TextField
-        value={user.phone}
+        value={form.phone}
         focused={false}
         fullWidth
         placeholder="+7"
+        onChange={handleChangeForm}
+        inputProps={{
+          "data-name": "phone",
+        }}
       />
 
       <Box mt="30px">
@@ -75,6 +104,7 @@ export const UserForm = ({ user }) => {
           variant="outlined"
           fullWidth
           color="secondary2"
+          onClick={() => updateUsersFx(form)}
         >
           Сохранить данные
         </Button>

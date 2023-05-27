@@ -54,7 +54,6 @@ export const Card = ({ name, price, count, id, user, type, img, isLink }) => {
             ) : (
               <Typography variant="h6">{name}</Typography>
             )}
-
             <Box
               display="flex"
               alignItems="center"

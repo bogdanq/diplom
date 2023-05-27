@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { Typography, Divider, Box } from "@mui/material";
+import Highlighter from "react-highlight-words";
 import { formatter } from "../features/common";
 import { AddToCart } from "../features/cart";
 import { AddToFavorite } from "../features/favorite";
@@ -44,7 +45,15 @@ const CartWrapper = styled("div")`
   }
 `;
 
-export const ItemCart = ({ id, name, description, price, img, type: t }) => {
+export const ItemCart = ({
+  id,
+  name,
+  description,
+  price,
+  img,
+  type: t,
+  value,
+}) => {
   const navigate = useNavigate();
   const { type: pt } = useParams();
 
@@ -58,8 +67,21 @@ export const ItemCart = ({ id, name, description, price, img, type: t }) => {
       >
         <img src={img} alt="cart" width="100%" height={200} />
 
-        <Typography variant="h6">{name}</Typography>
-        <Typography>{description}</Typography>
+        <Typography variant="h6">
+          <Highlighter
+            searchWords={[value]}
+            autoEscape={true}
+            textToHighlight={name}
+          />
+        </Typography>
+
+        <Typography>
+          <Highlighter
+            searchWords={[value]}
+            autoEscape={true}
+            textToHighlight={description}
+          />
+        </Typography>
         <Typography variant="h4">{formatter.format(price)}</Typography>
       </div>
 

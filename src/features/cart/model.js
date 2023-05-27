@@ -1,8 +1,12 @@
 import { createEffect, createStore, attach } from "effector";
 import { cartAPI } from "../../api/cart";
+import { toast } from "react-toastify";
+import { orderAPI } from "../../api/orders";
 
 export const getCartProductsFx = createEffect(cartAPI.getCartProducts);
 export const removeAllCartFx = createEffect(cartAPI.removeAllProductFromCart);
+export const createOrderFx = createEffect(orderAPI.createOrder);
+
 export const addProductToCartFx = attach({
   effect: createEffect(cartAPI.addProductToCart),
 });
@@ -47,7 +51,8 @@ export const $cart = createStore(null)
   })
   .on(removeAllCartFx.done, (cart, { params }) => {
     return null;
-  });
+  })
+  .reset(createOrderFx.done);
 
 export const $pending = getCartProductsFx.pending;
 export const $pendingAllRemove = removeAllCartFx.pending;
@@ -85,3 +90,7 @@ export const $cartInfo = $cart.map((cart) => {
 //   //   "root@mail.ru"
 //   // );
 // }, 500);
+
+createOrderFx.done.watch(() => {
+  toast.success("Заказ оформлен");
+});

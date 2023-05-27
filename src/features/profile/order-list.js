@@ -11,6 +11,11 @@ import {
   Table,
 } from "@mui/material";
 import { formatter } from "../common";
+import { useStore } from "effector-react";
+import { useEffect } from "react";
+import { $orders, getOrdersFx } from "./model";
+import { $user } from "../auth/model";
+import { getNoun } from "../utils";
 
 const rows = [
   {
@@ -34,32 +39,61 @@ const rows = [
 ];
 
 export const OrderList = () => {
+  const { email } = useStore($user);
+  const orders = useStore($orders);
+  const pending = useStore(getOrdersFx.pending);
+
+  console.log("orders", orders);
+
+  useEffect(() => {
+    getOrdersFx(email);
+  }, [email]);
+
+  if (!orders?.length) {
+    <Typography variant="h6" color="#622a0c">
+      Товаров нет
+    </Typography>;
+  }
+
+  if (pending || !orders) {
+    <Typography variant="h6" color="#622a0c">
+      Загрузка
+    </Typography>;
+  }
+
+  const price = orders?.flat().reduce((acc, item) => {
+    return (acc += item.price * item.count);
+  }, 0);
+
   return (
     <>
       <Typography variant="h6" color="#622a0c">
-        Всего 3 заказа на сумму {formatter.format(11232323)}
+        {orders?.length} {getNoun(orders?.length, "заказ", "заказа", "заказов")}{" "}
+        на сумму:
+        <span style={{ textDecoration: "underline" }}>
+          {formatter.format(price)}
+        </span>
       </Typography>
 
       <TableContainer sx={{ mt: "50px" }} component={Paper}>
         <Table sx={{ minWidth: "60vw" }}>
           <TableHead>
             <TableRow>
-              <TableCell>Название компании</TableCell>
+              <TableCell>Количество</TableCell>
               <TableCell align="right">Статус</TableCell>
               <TableCell align="right">Стоимость заказа</TableCell>
-              <TableCell align="right">Дата покупки</TableCell>
               <TableCell align="right">Товары</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
+            {orders?.map((order, index) => (
+              <TableRow key={index}>
                 <TableCell
                   component="th"
                   scope="row"
                   style={{ verticalAlign: "top" }}
                 >
-                  {row.name}
+                  {orders[index].length}
                 </TableCell>
 
                 <TableCell align="center" style={{ verticalAlign: "top" }}>
@@ -70,22 +104,23 @@ export const OrderList = () => {
                     color="#fff"
                     fontWeight="bold"
                   >
-                    {row.status}
+                    Оформлено
                   </Typography>
                 </TableCell>
 
                 <TableCell align="center" style={{ verticalAlign: "top" }}>
                   <Typography fontWeight="bold">
-                    {formatter.format(row.price)}
+                    {formatter.format(
+                      orders[index].reduce(
+                        (acc, item) => (acc += item.price),
+                        0
+                      )
+                    )}
                   </Typography>
                 </TableCell>
 
-                <TableCell align="center" style={{ verticalAlign: "top" }}>
-                  {row.date}
-                </TableCell>
-
                 <TableCell align="right">
-                  {row.products.map((product, idx) => (
+                  {orders[index].map((product, idx) => (
                     <Box key={idx} maxWidth="300px" pb="20px">
                       {product.name}
                     </Box>

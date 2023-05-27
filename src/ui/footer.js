@@ -19,7 +19,7 @@ export const Footer = () => {
                 <Link to="/test">Оплата</Link>
               </Grid>
               <Grid item xs={3}>
-                <Link to="/test">Магазины</Link>
+                <Link to="/shop">Магазины</Link>
               </Grid>
             </Grid>
           </Grid>
@@ -29,10 +29,10 @@ export const Footer = () => {
 
             <Grid container mt="20px">
               <Grid item xs={3}>
-                <Link to="/test">О нас</Link>
+                <Link to="/about">О нас</Link>
               </Grid>
               <Grid item xs={3}>
-                <Link to="/test">Блог</Link>
+                <Link to="/news">Новости</Link>
               </Grid>
             </Grid>
           </Grid>

@@ -12,6 +12,7 @@ import {
   $pendingAllRemove,
   removeAllCartFx,
   useCart,
+  createOrderFx,
 } from "../../features/cart";
 import { formatter } from "../../features/common";
 
@@ -127,6 +128,9 @@ export const Cart = () => {
                 width: "250px",
               }}
               variant="contained"
+              onClick={() => {
+                createOrderFx({ cart, email: user.email });
+              }}
             >
               Оформить заказ
             </Button>

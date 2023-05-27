@@ -19,12 +19,19 @@ import {
   Badge,
 } from "@mui/material";
 import { useStore } from "effector-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { $user } from "../features/auth/model";
 import { $favoriteInfo } from "../features/favorite";
 import { $cartInfo } from "../features/cart";
+import {
+  $searchValue,
+  handleChangeSearch,
+  search,
+  searchFx,
+} from "../features/product/model";
+import { useEffect } from "react";
 
 export const Link = styled(NavLink)`
   display: flex;
@@ -127,7 +134,20 @@ const Header = ({ user, cartCount, favoriteCount }) => {
   );
 };
 
-const SubHeader = ({ user, cartCount }) => {
+const SubHeader = ({ user }) => {
+  const value = useStore($searchValue);
+  const pending = useStore(searchFx.pending);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    return searchFx.done.watch(() => {
+      handleChangeSearch("");
+
+      navigate("/search");
+    });
+  }, [navigate]);
+
   return (
     <Grid container mt="20px" mb="50px">
       <Grid container item xs={2} alignItems="center" mr="40px">
@@ -146,8 +166,23 @@ const SubHeader = ({ user, cartCount }) => {
             display: "flex",
           }}
         >
-          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Поиск по сайту" />
-          <IconButton type="button" sx={{ p: "10px" }}>
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Поиск по сайту"
+            value={value}
+            onChange={(e) => handleChangeSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                search(value);
+              }
+            }}
+          />
+          <IconButton
+            type="button"
+            sx={{ p: "10px" }}
+            disabled={pending}
+            onClick={() => search(value)}
+          >
             <Search />
           </IconButton>
         </Paper>
