@@ -34,6 +34,8 @@ import { NewsPage } from "./pages/news/news";
 import { AboutPage } from "./pages/about";
 import { ShopPage } from "./pages/shop";
 import { SearchPage } from "./pages/search";
+import { PaymantPage } from "./pages/paymant";
+import { DeliveryPage } from "./pages/delivery";
 
 const t = createTheme({
   palette: {
@@ -150,6 +152,8 @@ const App = () => {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/shop" element={<ShopPage />} />
       <Route path="/search" element={<SearchPage />} />
+      <Route path="/payment" element={<PaymantPage />} />
+      <Route path="/delivery" element={<DeliveryPage />} />
     </Routes>
   );
 };
